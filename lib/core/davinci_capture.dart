@@ -57,16 +57,19 @@ class DavinciCapture {
   /// If the image is blurry, calculate the pixelratio dynamically. See the readme
   /// for more info on how to do it.
   /// Context is required.
-  static Future offStage(Widget widget,
-      {Duration? wait,
-      bool openFilePreview = true,
-      bool saveToDevice = false,
-      String fileName = 'davinci',
-      String? albumName,
-      double? pixelRatio,
-      required BuildContext context,
-      BrandTagConfiguration? brandTag,
-      bool returnImageUint8List = false}) async {
+  static Future offStage(
+    Widget widget, {
+    Duration? wait,
+    bool openFilePreview = true,
+    bool saveToDevice = false,
+    String fileName = 'davinci',
+    String? albumName,
+    double? pixelRatio,
+    required BuildContext context,
+    BrandTagConfiguration? brandTag,
+    bool returnImageUint8List = false,
+    Size logicalSize = const Size(200, 200),
+  }) async {
     /// finding the widget in the current context by the key.
     final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
 
@@ -76,8 +79,8 @@ class DavinciCapture {
     /// create a new build owner
     final BuildOwner buildOwner = BuildOwner(focusManager: FocusManager());
 
-    Size logicalSize =
-        View.of(context).physicalSize / View.of(context).devicePixelRatio;
+    // Size logicalSize =
+    //     View.of(context).physicalSize / View.of(context).devicePixelRatio;
     pixelRatio ??= View.of(context).devicePixelRatio;
     try {
       final RenderView renderView = RenderView(
